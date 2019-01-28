@@ -155,13 +155,24 @@ Deploy to Heroku
 ----------------
 Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications in a more robust way than via Cloud9. If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the next step.
 
-If using Cloud9, update your Heroku Toolbelt installation by typing the following command:
+We'll be interacting with Heroku directly from the terminal using the Heroku command-line interface (CLI). First, we'll need to install this. How this is done depends on your development environment:
 
+#### AWS Cloud9
+Run the following commands in the terminal:
+```bash
+wget -P /home/ec2-user/ https://cli-assets.heroku.com/heroku-linux-x64.tar.gz
+tar -xf /home/ec2-user/heroku-linux-x64.tar.gz -C /home/ec2-user
+echo 'export PATH=$PATH:~/heroku/bin' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### Windows Subsystem for Linux
+Run the following command in the terminal:
 ```
 $ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 ```
 
-Log in to your Heroku account by typing the command: `heroku login` in the Cloud9 terminal. This will connect your Cloud9 workspace to your Heroku account.
+Once the CLI is successfully installed, log in to your Heroku account by typing the command: `heroku login -i` in the terminal. You'll be prompted for your login credentials. Once logged in, your workspace will be connected to your Heroku account.
 
 While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in Heroku. This will tell the Heroku service to prepare for some incoming code, and locally on Cloud9, it will add a remote git repository for you called `heroku`.
 
