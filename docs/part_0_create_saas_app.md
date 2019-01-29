@@ -157,8 +157,8 @@ Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (
 
 We'll be interacting with Heroku directly from the terminal using the Heroku command-line interface (CLI). First, we'll need to install this. How this is done depends on your development environment:
 
-#### AWS Cloud9
-Run the following commands in the terminal:
+#### AWS Cloud9 (Amazon Linux)
+The default AWS Cloud9 environment is backed by an EC2 instance running Amazon Linux. Run the following commands in the terminal to set up the Herok CLI on this flavour of Linux:
 ```bash
 wget -P /home/ec2-user/ https://cli-assets.heroku.com/heroku-linux-x64.tar.gz
 tar -xf /home/ec2-user/heroku-linux-x64.tar.gz -C /home/ec2-user
@@ -166,8 +166,8 @@ echo 'export PATH=$PATH:~/heroku/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Windows Subsystem for Linux
-Run the following command in the terminal:
+#### Windows Subsystem for Linux (Ubuntu Linux)
+If you're running Ubuntu  with Windows Subsystem for Linux, or you're running Ubuntu in some other setup, run the following command in the terminal to set up the Heroku CLI:
 ```
 $ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 ```
