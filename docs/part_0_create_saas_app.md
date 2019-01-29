@@ -189,6 +189,8 @@ This tells Heroku to start a single web worker (Dyno) using essentially the same
 Your local Cloud9 repo is now ready to deploy to Heroku:
 
 ```
+$ heroku buildpacks:set https://github.com/bundler/heroku-buildpack-bundler2
+
 $ git push heroku master
 ```
 
