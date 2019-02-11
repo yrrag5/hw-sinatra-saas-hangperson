@@ -15,8 +15,6 @@ class HangpersonApp < Sinatra::Base
     session[:game] = @game
   end
   
-  # These two routes are good examples of Sinatra syntax
-  # to help you with the rest of the assignment
   get '/' do
     redirect '/new'
   end
@@ -34,33 +32,47 @@ class HangpersonApp < Sinatra::Base
     redirect '/show'
   end
   
-  # Use existing methods in HangpersonGame to process a guess.
-  # If a guess is repeated, set flash[:message] to "You have already used that letter."
-  # If a guess is invalid, set flash[:message] to "Invalid guess."
   post '/guess' do
     letter = params[:guess].to_s[0]
-    ### YOUR CODE HERE ###
+    begin 
+      if !@game.guess(letter)
+        flash[:message] = "Letter already used, please try again"
+      end
+      rescue ArgumentError => _
+      flash[:message] = "Character is incorrect, use a-z"
+    end
     redirect '/show'
   end
   
-  # Everytime a guess is made, we should eventually end up at this route.
-  # Use existing methods in HangpersonGame to check if player has
-  # won, lost, or neither, and take the appropriate action.
-  # Notice that the show.erb template expects to use the instance variables
-  # wrong_guesses and word_with_guesses from @game.
   get '/show' do
-    ### YOUR CODE HERE ###
-    erb :show # You may change/remove this line
+    redirect '/' if @game.word.nil? || @game.word.empty?
+    case @game.check_win_or_lose
+    when :win
+      redirect '/win'
+    when :lose
+      redirect '/lose'
+    end
+    erb :show
   end
   
   get '/win' do
-    ### YOUR CODE HERE ###
-    erb :win # You may change/remove this line
+    if @game.check_win_or_lose == :lose
+      redirect '/lose'
+    end
+    if @game.check_win_or_lose == :play
+      redirect '/show'
+    end
+    erb :win
   end
   
   get '/lose' do
-    ### YOUR CODE HERE ###
-    erb :lose # You may change/remove this line
+    if @game.check_win_or_lose == :win
+      redirect '/win'
+    end
+    if @game.check_win_or_lose == :play
+      redirect '/show'
+    end
+    erb :lose
   end
   
 end
