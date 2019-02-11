@@ -10,7 +10,7 @@ class HangpersonApp < Sinatra::Base
   before do
     @game = session[:game] || HangpersonGame.new('')
   end
-  
+   
   after do
     session[:game] = @game
   end
